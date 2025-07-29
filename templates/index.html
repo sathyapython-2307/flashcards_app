@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">Flashcards App</h1>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <form action="/add_deck" method="POST">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="name" placeholder="New deck name" required>
+                        <button class="btn btn-primary" type="submit">Create Deck</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for deck in decks %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ deck.name }}</h5>
+                        <p class="card-text">{{ deck.cards|length }} cards</p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="/deck/{{ deck.id }}" class="btn btn-outline-primary">View Cards</a>
+                        <a href="/quiz/{{ deck.id }}" class="btn btn-outline-success">Start Quiz</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
